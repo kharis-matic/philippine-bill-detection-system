@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New 50/20 Peso Bill Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="app-shell">
+        <header class="app-header">
+            <div>
+                <p class="eyebrow">YOLOv8 Philippine Peso Detection</p>
+                <h1>New 50/20 Peso Bill Detector</h1>
+            </div>
+            <div class="status-pill">Confidence threshold: 0.50</div>
+        </header>
+
+        <nav class="tabs" aria-label="Detection modes">
+            <button class="tab-button active" data-tab="image-tab">Image Detection</button>
+            <button class="tab-button" data-tab="video-tab">Video Processing</button>
+            <button class="tab-button" data-tab="webcam-tab">Live Webcam</button>
+        </nav>
+
+        <section id="image-tab" class="tab-panel active">
+            <div class="work-area">
+                <form id="image-form" class="upload-card">
+                    <h2>Image Detection</h2>
+                    <p>Upload a bill image and detect new 20-peso and 50-peso notes.</p>
+                    <label class="file-picker">
+                        <span>Choose image</span>
+                        <input type="file" name="image" accept="image/*" required>
+                    </label>
+                    <button type="submit">Detect Image</button>
+                    <div id="image-message" class="message"></div>
+                </form>
+
+                <div class="result-card">
+                    <h2>Image Result</h2>
+                    <img id="image-result" class="preview hidden" alt="Detected peso bills">
+                    <div id="image-summary" class="summary-grid"></div>
+                    <div id="image-detections" class="detections-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="video-tab" class="tab-panel">
+            <div class="work-area">
+                <form id="video-form" class="upload-card">
+                    <h2>Video Processing</h2>
+                    <p>Upload MP4, AVI, MOV, MKV, or WMV video for frame-by-frame detection.</p>
+                    <label class="file-picker">
+                        <span>Choose video</span>
+                        <input type="file" name="video" accept="video/mp4,video/x-msvideo,video/quicktime,video/*" required>
+                    </label>
+                    <button type="submit">Process Video</button>
+                    <div id="video-message" class="message"></div>
+                </form>
+
+                <div class="result-card">
+                    <h2>Processed Video</h2>
+                    <video id="video-result" class="preview hidden" controls></video>
+                    <div id="video-summary" class="summary-grid"></div>
+                    <div id="video-detections" class="detections-list"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="webcam-tab" class="tab-panel">
+            <div class="work-area">
+                <div class="upload-card">
+                    <h2>Live Webcam</h2>
+                    <p>Start the webcam stream to run YOLOv8 detection in real time.</p>
+                    <div class="button-row">
+                        <button id="start-webcam" type="button">Start Webcam</button>
+                        <button id="stop-webcam" type="button" class="secondary">Stop Webcam</button>
+                    </div>
+                    <div id="webcam-message" class="message"></div>
+                </div>
+
+                <div class="result-card">
+                    <h2>Live Detection Stream</h2>
+                    <img id="webcam-stream" class="preview hidden" alt="Live webcam detection stream">
+                    <div class="summary-grid static-summary">
+                        <div><span>20-peso bills</span><strong>Live</strong></div>
+                        <div><span>50-peso bills</span><strong>Live</strong></div>
+                        <div><span>Total value</span><strong>Shown on stream</strong></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
